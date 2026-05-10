@@ -1,7 +1,7 @@
 name: Deploy to AwardSpace
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   web-deploy:
@@ -12,11 +12,11 @@ jobs:
       - name: Sync to AwardSpace via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.yourdomain.tld # AwardSpace gives you this
+          server: gentrack.atwebpages.com # AwardSpace gives you this
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          protocol: ftps # use ftps if their server supports it, else ftp
-          server-dir: /yourdomain.tld/ # your site root inside the FTP account
+          protocol: ftp # use ftps if their server supports it, else ftp
+          server-dir: /gentrack.atwebpages.com/ # your site root inside the FTP account
           local-dir: ./ # or ./public/ if that's what should be exposed
           exclude: |
             **/.git*
