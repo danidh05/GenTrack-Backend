@@ -1,11 +1,14 @@
 <?php
-error_reporting(0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+error_log('[GenTrack] create.php reached top');
 
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../helpers.php';
 
 ['uid' => $uid, 'body' => $body] = verifyFirebaseToken();
+error_log('[GenTrack] Token verified, uid: ' . $uid);
 
 // --- Validation ---
 $localId  = requireParam($body, 'local_id');
@@ -39,6 +42,7 @@ if ($location !== null && strlen($location) > 255)
     respondError('location must be max 255 chars');
 
 // --- Upsert ---
+error_log('[GenTrack] About to run SQL');
 try {
     $db   = getDB();
     $stmt = $db->prepare("
