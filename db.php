@@ -15,8 +15,10 @@ function getDB(): PDO {
                 ]
             );
         } catch (PDOException $e) {
-            error_log('[GenTrack] DB Connection Error: ' . $e->getMessage());
-            throw $e;
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => 'Connection failed: ' . $e->getMessage()]);
+            exit;
         }
     }
     return $pdo;

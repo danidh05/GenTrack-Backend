@@ -74,9 +74,7 @@ try {
     respond(['message' => 'Customer saved']);
 
 } catch (PDOException $e) {
-    error_log('[GenTrack] PDO Error: ' . $e->getMessage() . ' | Code: ' . $e->getCode());
-    respondError('A database error occurred. Please try again.', 500);
+    respondError('DB Error: ' . $e->getMessage(), 500);
 } catch (Exception $e) {
-    error_log('[GenTrack] General Error: ' . $e->getMessage());
-    respondError('An unexpected error occurred.', 500);
+    respondError('General Error: ' . $e->getMessage(), 500);
 }
