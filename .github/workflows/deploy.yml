@@ -1,0 +1,27 @@
+name: Deploy to AwardSpace
+on:
+  push:
+    branches: [main]
+
+jobs:
+  web-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync to AwardSpace via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.yourdomain.tld # AwardSpace gives you this
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          protocol: ftps # use ftps if their server supports it, else ftp
+          server-dir: /yourdomain.tld/ # your site root inside the FTP account
+          local-dir: ./ # or ./public/ if that's what should be exposed
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
+            .env
+            .env.*

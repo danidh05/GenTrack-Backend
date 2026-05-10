@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteRule .\* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Prevent direct access to config.php
+
+<Files "config.php">
+Order allow,deny
+Deny from all
+</Files>
+
+# Set content type for all responses
+
+AddType application/json .php
