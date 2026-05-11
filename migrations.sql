@@ -85,6 +85,7 @@ CREATE TABLE remote_config (
   base_price_5a         DECIMAL(10,2) NOT NULL DEFAULT 0,
   base_price_10a        DECIMAL(10,2) NOT NULL DEFAULT 0,
   base_price_15a        DECIMAL(10,2) NOT NULL DEFAULT 0,
+  currency              VARCHAR(10)   NOT NULL DEFAULT 'USD',
   updated_at            DATETIME      NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

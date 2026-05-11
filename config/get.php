@@ -12,7 +12,8 @@ try {
     $stmt = $db->prepare("
         SELECT default_price_per_amp, generator_capacity,
                price_5a, price_10a, price_15a, price_per_kwh,
-               base_price_5a, base_price_10a, base_price_15a
+               base_price_5a, base_price_10a, base_price_15a,
+               currency
         FROM remote_config
         WHERE owner_uid = :uid
     ");
@@ -30,6 +31,7 @@ try {
             'base_price_5a'         => 0,
             'base_price_10a'        => 0,
             'base_price_15a'        => 0,
+            'currency'              => 'USD',
         ]);
     }
 
@@ -43,6 +45,7 @@ try {
         'base_price_5a'         => (float)$row['base_price_5a'],
         'base_price_10a'        => (float)$row['base_price_10a'],
         'base_price_15a'        => (float)$row['base_price_15a'],
+        'currency'              => (string)$row['currency'],
     ]);
 
 } catch (PDOException $e) {
