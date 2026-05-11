@@ -41,6 +41,11 @@ CREATE TABLE bills (
   previous_balance DECIMAL(12,2)   NOT NULL DEFAULT 0,
   final_total      DECIMAL(12,2)   NOT NULL,
   status           ENUM('Paid','Partial','Unpaid') NOT NULL DEFAULT 'Unpaid',
+  billing_model    VARCHAR(20)     NOT NULL DEFAULT 'flat',
+  current_reading  DECIMAL(10,2)  NOT NULL DEFAULT 0,
+  previous_reading DECIMAL(10,2)  NOT NULL DEFAULT 0,
+  consumption      DECIMAL(10,2)  NOT NULL DEFAULT 0,
+  tier_fee         DECIMAL(10,2)  NOT NULL DEFAULT 0,
   created_at       DATETIME        NOT NULL,
   updated_at       DATETIME        NOT NULL,
   UNIQUE KEY uq_owner_local (owner_uid, local_id)
